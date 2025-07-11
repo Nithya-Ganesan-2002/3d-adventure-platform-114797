@@ -43,3 +43,6 @@ watchfiles==1.0.5
 websockets==15.0.1
 SQLAlchemy==2.0.30
 # SQLite is Python built-in (via 'sqlite3')
+passlib[bcrypt]==1.7.4
+python-jose==3.3.0
+PyJWT==2.8.0

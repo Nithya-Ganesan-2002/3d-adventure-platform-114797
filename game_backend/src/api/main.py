@@ -4,13 +4,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from .db import engine
 from .models import Base
 from .auth import auth_router, get_current_user
+from .game import game_router
 
 app = FastAPI(
     title="3D Adventure Game Backend",
-    description="Handles game logic, user authentication, leaderboard, and more for the 3D adventure platform.",
+    description="Handles game logic, user authentication, leaderboard, progress, inventory, and more for the 3D adventure platform.",
     version="0.1.0",
     openapi_tags=[
         {"name": "Authentication", "description": "Endpoints related to user registration, login and tokens."},
+        {"name": "Game Actions", "description": "Endpoints for world movement, interaction, inventory, progress, and leaderboard"},
+        {"name": "Misc", "description": "Miscellaneous endpoints."}
     ],
 )
 
@@ -30,6 +33,7 @@ def on_startup():
     Base.metadata.create_all(bind=engine)
 
 app.include_router(auth_router)
+app.include_router(game_router)
 
 @app.get("/", tags=["Misc"])
 def health_check():
